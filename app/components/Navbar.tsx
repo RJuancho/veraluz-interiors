@@ -13,7 +13,7 @@ export default function Navbar() {
             height={40}
             className="rounded"
           />
-          <span className="text-xl font-bold text-[#1A1A1A] dark:text-white">Veraluz</span>
+          <span className="text-xl font-bold text-[#1A1A1A] dark:text-white">Veraluz Interiors</span>
         </Link>
         <div className="hidden sm:flex items-center gap-8">
           <Link href="/about" className="text-[#1A1A1A] dark:text-[#D1CDC4] hover:text-[#A29487] dark:hover:text-[#A29487] transition">
@@ -24,12 +24,6 @@ export default function Navbar() {
           </a>
           <a href="#contact" className="text-[#1A1A1A] dark:text-[#D1CDC4] hover:text-[#A29487] dark:hover:text-[#A29487] transition">
             Contact
-          </a>
-          <a
-            href="#contact"
-            className="rounded-lg bg-[#A29487] hover:bg-[#8b7d6f] px-6 py-2 font-medium text-white transition dark:bg-[#A29487] dark:hover:bg-[#8b7d6f]"
-          >
-            Get Started
           </a>
         </div>
       </div>

@@ -1,9 +1,39 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import { MdCheckCircle } from "react-icons/md";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function About() {
+  const { ref: storyRef, inView: storyInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref: comparisonRef, inView: comparisonInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref: strengthsRef, inView: strengthsInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref: processRef, inView: processInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.1, triggerOnce: true });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   const procedures = [
     { number: "01", title: "Demand Communication", color: "from-blue-400 to-blue-600" },
     { number: "02", title: "Space Design Interpretation", color: "from-orange-400 to-orange-600" },
@@ -32,6 +62,21 @@ export default function About() {
     },
   ];
 
+  const strengths = [
+    {
+      title: "Integrated Expertise",
+      description: "Our team combines deep knowledge in both interior design and lighting solutions, ensuring cohesive and effective project outcomes."
+    },
+    {
+      title: "Curated Selection",
+      description: "Access to high-quality lighting products from diverse suppliers, carefully selected to ensure excellence and value for every project."
+    },
+    {
+      title: "Client-Centric Approach",
+      description: "We prioritize understanding your vision and needs, delivering personalized solutions that transform your space exactly as you envision it."
+    }
+  ];
+
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-[#1A1A1A]">
       <Navbar />
@@ -47,49 +92,74 @@ export default function About() {
         />
         <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
         
-        <div className="max-w-4xl text-center relative z-10">
+        <motion.div 
+          className="max-w-4xl text-center relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <h1 className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-6xl">
             About Veraluz Interiors
           </h1>
           <p className="mb-8 text-xl text-[#D1CDC4]">
             Discover our story, values, and commitment to excellence
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Our Story Section */}
-      <section className="px-6 py-20 bg-white dark:bg-[#1A1A1A]">
+      <section className="px-6 py-20 bg-white dark:bg-[#1A1A1A]" ref={storyRef}>
         <div className="mx-auto max-w-4xl">
-          <div className="mb-12">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, x: -20 }}
+            animate={storyInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Story</h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-          </div>
+          </motion.div>
           
-          <div className="space-y-6 text-lg leading-relaxed text-[#4A4A4A] dark:text-[#E8E4DC]">
-            <p>
+          <motion.div 
+            className="space-y-6 text-lg leading-relaxed text-[#4A4A4A] dark:text-[#E8E4DC]"
+            variants={containerVariants}
+            initial="hidden"
+            animate={storyInView ? "visible" : "hidden"}
+          >
+            <motion.p variants={itemVariants}>
               Veraluz Interiors was founded with a simple yet powerful vision: to transform spaces through the perfect combination of thoughtful design and exceptional lighting. We believe that lighting is not just about illumination—it&apos;s about creating atmosphere, enhancing functionality, and telling a story within every space.
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={itemVariants}>
               Our journey began with a deep understanding that many interior design projects fall short because lighting is treated as an afterthought. We decided to change that by bringing together expertise in both interior design and specialized lighting solutions. Today, we serve clients across residential and commercial sectors, delivering integrated design services that exceed expectations.
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={itemVariants}>
               At Veraluz Interiors, we&apos;re passionate about working closely with our clients to understand their vision, their space, and their unique needs. Whether you&apos;re redesigning a home, revitalizing a commercial space, or launching a new project, we&apos;re committed to bringing your vision to light with elegance, innovation, and professionalism.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
       {/* Comparison Section */}
-      <section className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]">
+      <section className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]" ref={comparisonRef}>
         <div className="mx-auto max-w-5xl">
-          <div className="mb-12">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, x: -20 }}
+            animate={comparisonInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Why We&apos;re Different</h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <motion.div 
+            className="grid gap-8 md:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate={comparisonInView ? "visible" : "hidden"}
+          >
             {comparisonData.map((item, index) => (
-              <div key={index} className="group">
+              <motion.div key={index} className="group" variants={itemVariants}>
                 <div className="mb-4 h-1 w-12 bg-gradient-to-r from-[#A29487] to-[#D1CDC4] group-hover:w-24 transition-all duration-300"></div>
                 <h3 className="mb-6 text-xl font-bold text-[#1A1A1A] dark:text-white">{item.aspect}</h3>
                 
@@ -114,122 +184,175 @@ export default function About() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Our Strengths Section */}
-      <section className="px-6 py-20 bg-white dark:bg-[#1A1A1A]">
+      <section className="px-6 py-20 bg-white dark:bg-[#1A1A1A]" ref={strengthsRef}>
         <div className="mx-auto max-w-5xl">
-          <div className="mb-12">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, x: -20 }}
+            animate={strengthsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Strengths</h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "Integrated Expertise",
-                description: "Our team combines deep knowledge in both interior design and lighting solutions, ensuring cohesive and effective project outcomes."
-              },
-              {
-                title: "Curated Selection",
-                description: "Access to high-quality lighting products from diverse suppliers, carefully selected to ensure excellence and value for every project."
-              },
-              {
-                title: "Client-Centric Approach",
-                description: "We prioritize understanding your vision and needs, delivering personalized solutions that transform your space exactly as you envision it."
-              }
-            ].map((strength, index) => (
-              <div 
+          <motion.div 
+            className="grid gap-8 md:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate={strengthsInView ? "visible" : "hidden"}
+          >
+            {strengths.map((strength, index) => (
+              <motion.div 
                 key={index} 
                 className="group p-8 rounded-xl bg-white dark:bg-[#2A2A2A] border border-[#E8E4DC] dark:border-[#D1CDC4] dark:border-opacity-20 hover:border-[#A29487] dark:hover:border-[#A29487] transition-all duration-300 hover:shadow-lg"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#A29487] to-[#8b7d6f] group-hover:scale-110 transition-transform duration-300">
+                <motion.div 
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#A29487] to-[#8b7d6f]"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <MdCheckCircle size={24} className="text-white" />
-                </div>
+                </motion.div>
                 <h3 className="mb-4 text-xl font-bold text-[#1A1A1A] dark:text-white">{strength.title}</h3>
                 <p className="leading-relaxed text-[#4A4A4A] dark:text-[#E8E4DC]">
                   {strength.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Working Procedures Section */}
-      <section className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]">
+      <section className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]" ref={processRef}>
         <div className="mx-auto max-w-6xl">
-          <div className="mb-12">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, x: -20 }}
+            animate={processInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Process</h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-          </div>
+          </motion.div>
 
           {/* Desktop view */}
-          <div className="hidden lg:grid grid-cols-7 gap-4 mb-8">
+          <motion.div 
+            className="hidden lg:grid grid-cols-7 gap-4 mb-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={processInView ? "visible" : "hidden"}
+          >
             {procedures.map((step, index) => (
-              <div key={index} className="text-center group">
-                <div className={`mb-4 flex items-center justify-center h-20 rounded-xl bg-gradient-to-br ${step.color} p-1 group-hover:scale-105 transition-transform duration-300`}>
+              <motion.div 
+                key={index} 
+                className="text-center group"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+              >
+                <motion.div 
+                  className={`mb-4 flex items-center justify-center h-20 rounded-xl bg-gradient-to-br ${step.color} p-1`}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <div className="h-full w-full rounded-lg bg-white dark:bg-[#1A1A1A] flex items-center justify-center">
                     <span className={`text-2xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
                       {step.number}
                     </span>
                   </div>
-                </div>
+                </motion.div>
                 <p className="font-semibold text-sm text-[#1A1A1A] dark:text-white leading-tight">
                   {step.title}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Mobile/Tablet view */}
-          <div className="lg:hidden overflow-x-auto pb-4">
+          <motion.div 
+            className="lg:hidden overflow-x-auto pb-4"
+            initial={{ opacity: 0 }}
+            animate={processInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="flex gap-4 min-w-max">
               {procedures.map((step, index) => (
-                <div key={index} className="flex-shrink-0 w-48 text-center group">
-                  <div className={`mb-4 flex items-center justify-center h-24 rounded-xl bg-gradient-to-br ${step.color} p-1 group-hover:scale-105 transition-transform duration-300`}>
+                <motion.div 
+                  key={index} 
+                  className="flex-shrink-0 w-48 text-center group"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={processInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <motion.div 
+                    className={`mb-4 flex items-center justify-center h-24 rounded-xl bg-gradient-to-br ${step.color} p-1`}
+                    whileHover={{ scale: 1.05 }}
+                  >
                     <div className="h-full w-full rounded-lg bg-white dark:bg-[#1A1A1A] flex items-center justify-center">
                       <span className={`text-2xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
                         {step.number}
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
                   <p className="font-semibold text-sm text-[#1A1A1A] dark:text-white text-center leading-tight">
                     {step.title}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#1A1A1A] dark:bg-[#1A1A1A] px-6 py-20 text-center">
-        <div className="mx-auto max-w-2xl">
+      <section className="bg-[#1A1A1A] dark:bg-[#1A1A1A] px-6 py-20 text-center" ref={ctaRef}>
+        <motion.div 
+          className="mx-auto max-w-2xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={ctaInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="mb-4 text-4xl font-bold text-white">Ready to Illuminate Your Space?</h2>
           <p className="mb-8 text-lg text-[#D1CDC4] leading-relaxed">
             Let&apos;s work together to transform your vision into reality with elegant design and exceptional lighting solutions.
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <a
+          <motion.div 
+            className="flex flex-col gap-4 sm:flex-row sm:justify-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate={ctaInView ? "visible" : "hidden"}
+          >
+            <motion.a
               href="/#portfolio"
-              className="inline-block rounded-lg bg-[#A29487] hover:bg-[#8b7d6f] px-8 py-3 font-medium text-white transition transform hover:scale-105"
+              className="inline-block rounded-lg bg-[#A29487] hover:bg-[#8b7d6f] px-8 py-3 font-medium text-white transition"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               View Services
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="mailto:info@veraluzinteriors.com"
-              className="inline-block rounded-lg border-2 border-white text-white hover:bg-white hover:text-[#1A1A1A] px-8 py-3 font-medium transition transform hover:scale-105"
+              className="inline-block rounded-lg border-2 border-white text-white hover:bg-white hover:text-[#1A1A1A] px-8 py-3 font-medium transition"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Get in Touch
-            </a>
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Footer Section */}
