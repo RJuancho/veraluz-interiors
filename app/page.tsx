@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "./components/Navbar";
+import { MdOutlineLightbulb, MdLightbulb, MdBusiness } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -40,36 +42,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="bg-[#D1CDC4] bg-opacity-20 dark:bg-[#D1CDC4] dark:bg-opacity-10 px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-8 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Story</h2>
-          <p className="mb-6 text-lg text-[#1A1A1A] dark:text-white">
-            Veraluz Interiors seamlessly integrates interior lighting design, interior design consulting, and premium lighting product sales to create harmonious and aesthetically pleasing spaces. Our team is composed of professionals with profound knowledge and rich experience in all aspects of interior design and lighting innovation.
-          </p>
-          <p className="text-lg text-[#1A1A1A] dark:text-white">
-            With a passion for transforming environments through light and design, we provide comprehensive one-stop solutions to meet diverse needs in the interior design and lighting market. From concept to completion, we deliver exceptional results through collaborative expertise, quality materials, and meticulous attention to detail.
-          </p>
-        </div>
-      </section>
-
       {/* Services Section */}
-      <section id="portfolio" className="px-6 py-20 bg-white dark:bg-[#1A1A1A]">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Services</h2>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Interior Lighting Design",
-              "Design Consulting",
-              "Lighting Product Sales",
-              "Residential Projects",
-              "Commercial Spaces",
-              "Complete Space Planning"
-            ].map((service) => (
-              <div key={service} className="rounded-lg border border-[#D1CDC4] dark:border-[#A29487] bg-white dark:bg-[#2a2a2a] p-6 hover:border-[#A29487] dark:hover:border-[#D1CDC4] transition">
-                <h3 className="font-semibold text-[#1A1A1A] dark:text-white">{service}</h3>
+      <section id="portfolio" className="px-6 py-24 bg-[#D1CDC4] bg-opacity-15 dark:bg-[#D1CDC4] dark:bg-opacity-5">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16">
+            <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Our Services</h2>
+            <div className="h-1 w-24 bg-[#1A1A1A] dark:bg-white"></div>
+          </div>
+          
+          <div className="space-y-12">
+            {/* Service 1 */}
+            <div className="flex flex-col md:flex-row md:items-center md:gap-12">
+              <div className="md:flex-1">
+                <h3 className="mb-4 text-2xl font-bold text-[#1A1A1A] dark:text-white">Interior Lighting Design</h3>
+                <p className="text-lg text-[#1A1A1A] dark:text-white">
+                  We offer a customized interior lighting design services. Our designers use advanced lighting design software and techniques to create lighting plans that not only provide sufficient illumination but also enhance the atmosphere and functionality of the space. For example, in a commercial space, we can design lighting to highlight display areas, while in a residential space, we focus on creating a warm and comfortable living environment.
+                </p>
               </div>
-            ))}
+              <div className="mt-8 md:mt-0 md:shrink-0 flex justify-center">
+                <div className="w-32 h-32 rounded-full bg-linear-to-br from-[#D1CDC4] to-[#A29487] flex items-center justify-center text-white">
+                  <MdOutlineLightbulb size={64} />
+                </div>
+              </div>
+            </div>
+
+            {/* Service 2 */}
+            <div className="flex flex-col md:flex-row-reverse md:items-center md:gap-12">
+              <div className="md:flex-1">
+                <h3 className="mb-4 text-2xl font-bold text-[#1A1A1A] dark:text-white">Interior Design Consulting</h3>
+                <p className="text-lg text-[#1A1A1A] dark:text-white">
+                  Our interior design consulting service is aimed at providing professional advice to clients. Whether it&apos;s space planning, color matching, or material selection, our consultants draw on their extensive experience to offer personalized suggestions. We help clients understand the latest design trends and how to incorporate them into their projects, ensuring that the final design meets their aesthetic and practical requirements.
+                </p>
+              </div>
+              <div className="mt-8 md:mt-0 md:shrink-0 flex justify-center">
+                <div className="w-32 h-32 rounded-full bg-linear-to-br from-[#D1CDC4] to-[#A29487] flex items-center justify-center text-white">
+                  <MdBusiness size={64} />
+                </div>
+              </div>
+            </div>
+
+            {/* Service 3 */}
+            <div className="flex flex-col md:flex-row md:items-center md:gap-12">
+              <div className="md:flex-1">
+                <h3 className="mb-4 text-2xl font-bold text-[#1A1A1A] dark:text-white">Lighting Product Sales</h3>
+                <p className="text-lg text-[#1A1A1A] dark:text-white">
+                  We have an extensive collection of lighting products or components from diverse suppliers. These products range from energy-efficient LED lights to stylish decorative lamps. We carefully select each product to ensure high quality, and our team can recommend the most suitable lighting products based on the specific needs of different projects.
+                </p>
+              </div>
+              <div className="mt-8 md:mt-0 md:shrink-0 flex justify-center">
+                <div className="w-32 h-32 rounded-full bg-linear-to-br from-[#D1CDC4] to-[#A29487] flex items-center justify-center text-white">
+                  <MdLightbulb size={64} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -79,7 +104,7 @@ export default function Home() {
         <div className="mx-auto max-w-2xl">
           <h2 className="mb-6 text-4xl font-bold text-white">Ready to Illuminate Your Space?</h2>
           <p className="mb-8 text-lg text-[#D1CDC4]">
-            Let's discuss your project and bring your vision to light.
+            Let&apos;s discuss your project and bring your vision to light.
           </p>
           <a
             href="mailto:info@veraluzinteriors.com"
@@ -111,7 +136,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-[#A29487] dark:text-[#D1CDC4]">
                 <li><a href="#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Portfolio</a></li>
                 <li><a href="#contact" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Contact</a></li>
-                <li><a href="/" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Home</a></li>
+                <li><Link href="/" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Home</Link></li>
               </ul>
             </div>
             <div>
