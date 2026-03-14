@@ -26,15 +26,32 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Veraluz Interiors | Interior Design & Craftsmanship",
+  title: "Veraluz Interiors | Specialists in Lighting",
   description:
-    "Illuminating spaces with elegant interior design and curated lighting solutions. Premium lighting design, consulting, and product sales.",
+    "Transform your space with Veraluz Interiors. Expert lighting design, premium acoustic panels, and curated interior solutions for residential and commercial projects.",
   keywords:
-    "interior design, interior lighting design, lighting consultation, residential design, commercial design, lighting products",
+    "lighting design, interior design, acoustic panels, luxury lighting, lighting consultation, residential lighting, commercial lighting, lighting products, interior design services",
   authors: [{ name: "Veraluz Interiors" }],
   icons: {
     icon: "/logo.png",
   },
+  openGraph: {
+    title: "Veraluz Interiors | Luxury Lighting & Interior Design Solutions",
+    description:
+      "Transform your space with Veraluz Interiors. Expert lighting design, premium acoustic panels, and curated interior solutions.",
+    type: "website",
+    url: "https://veraluzinteriors.com",
+    siteName: "Veraluz Interiors",
+    images: [
+      {
+        url: "/logo.png",
+        width: 768,
+        height: 768,
+        alt: "Veraluz Interiors Logo",
+      },
+    ],
+  },
+  robots: "index, follow",
 };
 
 export default function RootLayout({
