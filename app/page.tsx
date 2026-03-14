@@ -6,11 +6,14 @@ import Navbar from "./components/Navbar";
 import { MdOutlineLightbulb, MdLightbulb, MdBusiness } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useState } from "react";
 
 export default function Home() {
   const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.1, triggerOnce: true });
   const { ref: trendsRef, inView: trendsInView } = useInView({ threshold: 0.1, triggerOnce: true });
   const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.1, triggerOnce: true });
+
+  const [expandedTrend, setExpandedTrend] = useState<number | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -31,6 +34,33 @@ export default function Home() {
       transition: { duration: 0.5 },
     },
   };
+
+  const trendsData = [
+    {
+      id: 1,
+      title: "Sustainability & Biophilic Design",
+      description: "Green plant integration, natural material application",
+      image: "/trends-sustainability.png",
+      details: "Integrate natural elements and sustainable materials to create spaces that promote employee wellbeing and reduce environmental impact.",
+      benefits: ["↑ 15% productivity boost", "↓ 23% energy costs", "↑ Employee satisfaction"],
+    },
+    {
+      id: 2,
+      title: "Flexible Layout",
+      description: "Open collaboration areas + private focus areas + leisure areas",
+      image: "/trends-flexible-layout.png",
+      details: "Design adaptable workspaces that support both collaborative teamwork and focused individual work.",
+      benefits: ["↑ Collaboration", "↑ Focus time", "↓ Noise issues"],
+    },
+    {
+      id: 3,
+      title: "Human-Centered Experience",
+      description: "Prioritizing comfort and employee health",
+      image: "/trends-human-centered.png",
+      details: "Create ergonomic, comfortable spaces that prioritize employee wellness and mental health.",
+      benefits: ["↓ Sick days", "↑ Retention", "↑ Morale"],
+    },
+  ];
 
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-[#1A1A1A]">
@@ -87,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="portfolio" className="px-6 py-24 bg-[#D1CDC4] bg-opacity-15 dark:bg-[#D1CDC4] dark:bg-opacity-5" ref={servicesRef}>
+      <section id="portfolio" className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]" ref={servicesRef}>
         <div className="mx-auto max-w-5xl">
           <motion.div 
             className="mb-16"
@@ -174,7 +204,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Office Space Design Trends Section */}
+      {/* Office Space Design Trends Section - Hover Reveal */}
       <section className="px-6 py-24 bg-white dark:bg-[#1A1A1A]" ref={trendsRef}>
         <div className="mx-auto max-w-5xl">
           <motion.div 
@@ -183,7 +213,7 @@ export default function Home() {
             animate={trendsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Office Space Design Trends</h2>
+            <h2 className="mb-4 text-4xl font-bold text-[#1A1A1A] dark:text-white">Design Trends Shaping Modern Workspaces</h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
           </motion.div>
 
@@ -193,75 +223,105 @@ export default function Home() {
             initial="hidden"
             animate={trendsInView ? "visible" : "hidden"}
           >
-            {/* Trend 1 */}
-            <motion.div 
-              className="group rounded-xl overflow-hidden bg-white dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 hover:shadow-lg transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/trends-sustainability.png"
-                  alt="Sustainability & biophilic design with green plants and natural materials"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold text-[#A29487]">Sustainability & Biophilic Design</h3>
-                <div className="mb-4 h-1 w-12 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-                <p className="text-sm text-[#1A1A1A] dark:text-[#D1CDC4]">
-                  Green plant integration, natural material application
-                </p>
-              </div>
-            </motion.div>
+            {trendsData.map((trend, index) => (
+              <motion.div
+                key={trend.id}
+                className="group relative cursor-pointer h-96"
+                variants={itemVariants}
+                onHoverStart={() => setExpandedTrend(index)}
+                onHoverEnd={() => setExpandedTrend(null)}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-xl overflow-hidden bg-white dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 hover:shadow-lg transition-all duration-300"
+                  initial={false}
+                  animate={{
+                    boxShadow: expandedTrend === index 
+                      ? "0 20px 40px rgba(0,0,0,0.2)" 
+                      : "0 0 0 rgba(0,0,0,0)"
+                  }}
+                >
+                  {/* Image Background */}
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={{
+                      scale: expandedTrend === index ? 1.1 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image
+                      src={trend.image}
+                      alt={trend.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
 
-            {/* Trend 2 */}
-            <motion.div 
-              className="group rounded-xl overflow-hidden bg-white dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 hover:shadow-lg transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/trends-flexible-layout.png"
-                  alt="Flexible office layout with open collaboration areas and private focus zones"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold text-[#A29487]">Flexible Layout</h3>
-                <div className="mb-4 h-1 w-12 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-                <p className="text-sm text-[#1A1A1A] dark:text-[#D1CDC4]">
-                  Open collaboration areas + private focus areas + leisure areas
-                </p>
-              </div>
-            </motion.div>
+                  {/* Overlay - Always visible */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
 
-            {/* Trend 3 */}
-            <motion.div 
-              className="group rounded-xl overflow-hidden bg-white dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 hover:shadow-lg transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/trends-human-centered.png"
-                  alt="Human-centered office design prioritizing comfort and employee health"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold text-[#A29487]">Human-Centered Experience</h3>
-                <div className="mb-4 h-1 w-12 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
-                <p className="text-sm text-[#1A1A1A] dark:text-[#D1CDC4]">
-                  Prioritizing comfort and employee health
-                </p>
-              </div>
-            </motion.div>
+                  {/* Default Content */}
+                  <motion.div
+                    className="absolute inset-0 p-6 flex flex-col justify-end"
+                    animate={{
+                      opacity: expandedTrend === index ? 0 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <h3 className="mb-2 text-xl font-bold text-white">{trend.title}</h3>
+                    <div className="mb-4 h-1 w-12 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
+                    <p className="text-sm text-[#D1CDC4]">{trend.description}</p>
+                  </motion.div>
+
+                  {/* Revealed Content on Hover */}
+                  <motion.div
+                    className="absolute inset-0 p-6 flex flex-col justify-between bg-black/85"
+                    animate={{
+                      opacity: expandedTrend === index ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      pointerEvents: expandedTrend === index ? "auto" : "none",
+                    }}
+                  >
+                    <div>
+                      <h3 className="mb-4 text-xl font-bold text-white">{trend.title}</h3>
+                      <p className="text-sm text-[#D1CDC4] leading-relaxed mb-6">
+                        {trend.details}
+                      </p>
+                    </div>
+
+                    {/* Benefits */}
+                    <div className="space-y-3">
+                      <p className="text-xs font-semibold text-[#A29487] uppercase tracking-wide">Key Benefits</p>
+                      <div className="space-y-2">
+                        {trend.benefits.map((benefit, i) => (
+                          <motion.div
+                            key={i}
+                            className="text-sm text-white flex items-center gap-2"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={expandedTrend === index ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                            transition={{ delay: i * 0.1 }}
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#A29487]"></span>
+                            {benefit}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
           </motion.div>
+
+          <motion.p
+            className="mt-8 text-center text-sm text-[#A29487] dark:text-[#D1CDC4]"
+            initial={{ opacity: 0 }}
+            animate={trendsInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            Hover on cards to discover implementation benefits
+          </motion.p>
         </div>
       </section>
 

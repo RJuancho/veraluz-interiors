@@ -35,13 +35,13 @@ export default function About() {
   };
 
   const procedures = [
-    { number: "01", title: "Demand Communication", color: "from-blue-400 to-blue-600" },
-    { number: "02", title: "Space Design Interpretation", color: "from-orange-400 to-orange-600" },
-    { number: "03", title: "Lighting Scheme Design", color: "from-gray-400 to-gray-600" },
-    { number: "04", title: "Product Selection Matching", color: "from-yellow-400 to-yellow-600" },
-    { number: "05", title: "Manufacturing Coordination", color: "from-blue-400 to-blue-600" },
-    { number: "06", title: "Installation Guidance", color: "from-yellow-400 to-yellow-600" },
-    { number: "07", title: "After Sales Support", color: "from-blue-400 to-blue-600" },
+    { number: "01", title: "Demand Communication", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "02", title: "Space Design Interpretation", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "03", title: "Lighting Scheme Design", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "04", title: "Product Selection Matching", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "05", title: "Manufacturing Coordination", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "06", title: "Installation Guidance", color: "from-[#A29487] to-[#8b7d6f]" },
+    { number: "07", title: "After Sales Support", color: "from-[#A29487] to-[#8b7d6f]" },
   ];
 
   const comparisonData = [
@@ -96,7 +96,7 @@ export default function About() {
           className="max-w-4xl text-center relative z-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
         >
           <h1 className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-6xl">
             About Veraluz Interiors
@@ -233,11 +233,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* Working Procedures Section */}
-      <section className="px-6 py-20 bg-[#F5F1ED] dark:bg-[#2A2A2A]" ref={processRef}>
-        <div className="mx-auto max-w-6xl">
+      {/* Working Procedures Section - Timeline Approach */}
+      <section className="px-6 py-20 bg-white dark:bg-[#1A1A1A]" ref={processRef}>
+        <div className="mx-auto max-w-5xl">
           <motion.div 
-            className="mb-12"
+            className="mb-16"
             initial={{ opacity: 0, x: -20 }}
             animate={processInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6 }}
@@ -246,71 +246,56 @@ export default function About() {
             <div className="h-1 w-24 bg-gradient-to-r from-[#A29487] to-[#D1CDC4]"></div>
           </motion.div>
 
-          {/* Desktop view */}
+          {/* Timeline */}
           <motion.div 
-            className="hidden lg:grid grid-cols-7 gap-4 mb-8"
+            className="space-y-8 relative"
             variants={containerVariants}
             initial="hidden"
             animate={processInView ? "visible" : "hidden"}
           >
+            {/* Vertical Line */}
+            <div className="absolute left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-[#A29487] via-[#A29487] to-[#D1CDC4] hidden md:block"></div>
+
             {procedures.map((step, index) => (
               <motion.div 
-                key={index} 
-                className="text-center group"
+                key={index}
+                className="flex gap-6 md:gap-12 items-start group relative"
                 variants={itemVariants}
-                whileHover={{ y: -5 }}
+                whileHover={{ x: 5 }}
               >
+                {/* Step Number Circle */}
                 <motion.div 
-                  className={`mb-4 flex items-center justify-center h-20 rounded-xl bg-gradient-to-br ${step.color} p-1`}
-                  whileHover={{ scale: 1.05 }}
+                  className={`flex-shrink-0 w-24 h-24 rounded-full bg-gradient-to-br ${step.color} p-1 flex items-center justify-center relative z-10 shadow-lg group-hover:shadow-xl transition-shadow`}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="h-full w-full rounded-lg bg-white dark:bg-[#1A1A1A] flex items-center justify-center">
-                    <span className={`text-2xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
+                  <div className="w-full h-full rounded-full bg-white dark:bg-[#1A1A1A] flex items-center justify-center">
+                    <span className={`text-3xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
                       {step.number}
                     </span>
                   </div>
                 </motion.div>
-                <p className="font-semibold text-sm text-[#1A1A1A] dark:text-white leading-tight">
-                  {step.title}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Mobile/Tablet view */}
-          <motion.div 
-            className="lg:hidden overflow-x-auto pb-4"
-            initial={{ opacity: 0 }}
-            animate={processInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex gap-4 min-w-max">
-              {procedures.map((step, index) => (
+                {/* Content */}
                 <motion.div 
-                  key={index} 
-                  className="flex-shrink-0 w-48 text-center group"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={processInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{ y: -5 }}
+                  className="flex-1 pt-3 p-6 rounded-lg bg-[#F5F1ED] dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 group-hover:border-[#A29487] dark:group-hover:border-[#A29487] transition-all duration-300"
+                  whileHover={{ backgroundColor: "#F5F1ED" }}
                 >
-                  <motion.div 
-                    className={`mb-4 flex items-center justify-center h-24 rounded-xl bg-gradient-to-br ${step.color} p-1`}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="h-full w-full rounded-lg bg-white dark:bg-[#1A1A1A] flex items-center justify-center">
-                      <span className={`text-2xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
-                        {step.number}
-                      </span>
-                    </div>
-                  </motion.div>
-                  <p className="font-semibold text-sm text-[#1A1A1A] dark:text-white text-center leading-tight">
+                  <h3 className="text-2xl font-bold text-[#1A1A1A] dark:text-white mb-3 group-hover:text-[#A29487] dark:group-hover:text-[#D1CDC4] transition">
                     {step.title}
+                  </h3>
+                  <p className="text-[#4A4A4A] dark:text-[#E8E4DC] leading-relaxed text-sm md:text-base">
+                    {index === 0 && "We begin by listening to your needs, requirements, and vision for the space. Understanding your goals and constraints helps us develop a tailored approach."}
+                    {index === 1 && "Our team analyzes your space dimensions, layout, and functionality to create an optimal design framework that maximizes potential."}
+                    {index === 2 && "We develop comprehensive lighting schemes that enhance ambiance, functionality, and energy efficiency for your specific environment."}
+                    {index === 3 && "We curate premium products from our diverse supplier network, ensuring quality and value while matching your design vision."}
+                    {index === 4 && "We coordinate manufacturing timelines and quality control to ensure all components meet our high standards before delivery."}
+                    {index === 5 && "Our team provides expert guidance during installation, ensuring every detail is executed perfectly for optimal results."}
+                    {index === 6 && "We remain your partner beyond installation, providing ongoing support and maintenance guidance for lasting satisfaction."}
                   </p>
                 </motion.div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -334,13 +319,13 @@ export default function About() {
             animate={ctaInView ? "visible" : "hidden"}
           >
             <motion.a
-              href="/#portfolio"
+              href="/"
               className="inline-block rounded-lg bg-[#A29487] hover:bg-[#8b7d6f] px-8 py-3 font-medium text-white transition"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View Services
+              Back to Home
             </motion.a>
             <motion.a
               href="mailto:info@veraluzinteriors.com"
@@ -366,9 +351,9 @@ export default function About() {
             <div>
               <h4 className="font-semibold text-[#1A1A1A] dark:text-white mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                <li><a href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Lighting Design</a></li>
-                <li><a href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Design Consulting</a></li>
-                <li><a href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Product Sales</a></li>
+                <li><Link href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Lighting Design</Link></li>
+                <li><Link href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Design Consulting</Link></li>
+                <li><Link href="/#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Product Sales</Link></li>
               </ul>
             </div>
             <div>
@@ -376,7 +361,7 @@ export default function About() {
               <ul className="space-y-2 text-sm text-[#A29487] dark:text-[#D1CDC4]">
                 <li><Link href="/" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Home</Link></li>
                 <li><Link href="/about" className="hover:text-[#1A1A1A] dark:hover:text-white transition">About</Link></li>
-                <li><a href="/#contact" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Contact</a></li>
+                <li><Link href="/#contact" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Contact</Link></li>
               </ul>
             </div>
             <div>

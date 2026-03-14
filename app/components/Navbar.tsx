@@ -22,6 +22,9 @@ export default function Navbar() {
           <a href="#portfolio" className="text-[#1A1A1A] dark:text-[#D1CDC4] hover:text-[#A29487] dark:hover:text-[#A29487] transition">
             Services
           </a>
+          <Link href="/products" className="text-[#1A1A1A] dark:text-[#D1CDC4] hover:text-[#A29487] dark:hover:text-[#A29487] transition">
+            Products
+          </Link>
           <a href="#contact" className="text-[#1A1A1A] dark:text-[#D1CDC4] hover:text-[#A29487] dark:hover:text-[#A29487] transition">
             Contact
           </a>
