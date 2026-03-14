@@ -278,8 +278,7 @@ export default function About() {
 
                 {/* Content */}
                 <motion.div 
-                  className="flex-1 pt-3 p-6 rounded-lg bg-[#F5F1ED] dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 group-hover:border-[#A29487] dark:group-hover:border-[#A29487] transition-all duration-300"
-                  whileHover={{ backgroundColor: "#F5F1ED" }}
+                  className="flex-1 pt-3 p-6 rounded-lg bg-[#F5F1ED] dark:bg-[#2A2A2A] border border-[#D1CDC4] dark:border-[#D1CDC4] dark:border-opacity-20 group-hover:border-[#A29487] dark:group-hover:border-[#A29487] hover:bg-[#EFEAE4] dark:hover:bg-[#333333] transition-all duration-300"
                 >
                   <h3 className="text-2xl font-bold text-[#1A1A1A] dark:text-white mb-3 group-hover:text-[#A29487] dark:group-hover:text-[#D1CDC4] transition">
                     {step.title}
