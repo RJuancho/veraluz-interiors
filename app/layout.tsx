@@ -33,10 +33,15 @@ export const metadata: Metadata = {
     "lighting design, interior design, acoustic panels, luxury lighting, lighting consultation, residential lighting, commercial lighting, lighting products, interior design services",
   authors: [{ name: "Veraluz Interiors" }],
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: "Veraluz Interiors | Luxury Lighting & Interior Design Solutions",
+    title: "Veraluz Interiors | Specialists in Lighting",
     description:
       "Transform your space with Veraluz Interiors. Expert lighting design, premium acoustic panels, and curated interior solutions.",
     type: "website",
