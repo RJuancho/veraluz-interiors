@@ -1,11 +1,43 @@
 "use client";
 
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { MdOutlineEmail, MdOutlinePhone, MdOutlineLocationOn } from "react-icons/md";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+  });
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setSubmitted(false);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "Failed to send message.");
+
+      setSubmitted(true);
+      setForm({ fullName: "", email: "", message: "" });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send message.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-[#1A1A1A]">
@@ -13,9 +45,7 @@ export default function ContactPage() {
 
       <section className="px-6 pt-8 pb-2">
         <div className="mx-auto max-w-7xl">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] dark:text-white">
-            Contact
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] dark:text-white">Contact</h1>
           <p className="mt-2 text-[#A29487] dark:text-[#D1CDC4]">
             Let’s discuss your lighting and interior design project.
           </p>
@@ -41,27 +71,22 @@ export default function ContactPage() {
               <MdOutlinePhone className="mt-0.5 text-lg text-[#A29487]" />
               <span>
                 Phone:{" "}
-                <a href="tel:+8613800138000" className="text-[#A29487] hover:underline">
-                  +86 19921575468
+                <a href="tel:+8619921575468" className="text-[#A29487] hover:underline">
+                  +86 199 2157 5468
                 </a>
               </span>
             </p>
 
             <p className="mt-2 flex items-start gap-2 text-sm text-[#4A4A4A] dark:text-[#E8E4DC]">
               <MdOutlineLocationOn className="mt-0.5 text-lg text-[#A29487]" />
-              <span>Address: 123 Sample St., Makati City, Metro Manila, Philippines</span>
+              <span>Address: 8th Floor, Building 1, No. 188 Changyi Road, Baoshan District, Shanghai, P.R. China</span>
             </p>
 
-            <p className="mt-2 text-sm text-[#4A4A4A] dark:text-[#E8E4DC]">
-              We usually respond within 1–2 business days.
-            </p>
+            <p className="mt-2 text-sm text-[#4A4A4A] dark:text-[#E8E4DC]">We usually respond within 1–2 business days.</p>
           </div>
 
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSubmitted(true);
-            }}
+            onSubmit={onSubmit}
             className="rounded-xl border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-white dark:bg-[#2A2A2A] p-6"
           >
             <h2 className="text-xl font-semibold text-[#1A1A1A] dark:text-white">Send a message</h2>
@@ -71,34 +96,42 @@ export default function ContactPage() {
                 required
                 type="text"
                 placeholder="Full Name"
+                value={form.fullName}
+                onChange={(e) => setForm((prev) => ({ ...prev, fullName: e.target.value }))}
                 className="w-full rounded-lg border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-white dark:bg-[#1A1A1A] px-3 py-2 text-[#1A1A1A] dark:text-white placeholder-[#A29487] focus:outline-none focus:border-[#A29487]"
               />
               <input
                 required
                 type="email"
                 placeholder="Email Address"
+                value={form.email}
+                onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
                 className="w-full rounded-lg border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-white dark:bg-[#1A1A1A] px-3 py-2 text-[#1A1A1A] dark:text-white placeholder-[#A29487] focus:outline-none focus:border-[#A29487]"
               />
               <textarea
                 required
                 placeholder="Tell us about your project"
                 rows={5}
+                value={form.message}
+                onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                 className="w-full rounded-lg border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-white dark:bg-[#1A1A1A] px-3 py-2 text-[#1A1A1A] dark:text-white placeholder-[#A29487] focus:outline-none focus:border-[#A29487]"
               />
             </div>
 
             <button
               type="submit"
-              className="mt-5 w-full rounded-lg bg-[#A29487] px-4 py-2 font-medium text-white transition hover:bg-[#8b7d6f]"
+              disabled={loading}
+              className="mt-5 w-full rounded-lg bg-[#A29487] px-4 py-2 font-medium text-white transition hover:bg-[#8b7d6f] disabled:opacity-60"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
 
             {submitted && (
               <p className="mt-3 text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                Message submitted. We’ll contact you soon.
+                Message sent. We’ll contact you soon.
               </p>
             )}
+            {error && <p className="mt-3 text-sm text-red-500">{error}</p>}
           </form>
         </div>
       </section>
