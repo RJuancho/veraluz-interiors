@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { FormEvent, useState } from "react";
 import { MdOutlineEmail, MdOutlinePhone, MdOutlineLocationOn } from "react-icons/md";
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -43,15 +45,33 @@ export default function ContactPage() {
     <div className="flex min-h-screen flex-col bg-white dark:bg-[#1A1A1A]">
       <Navbar />
 
-      <section className="px-6 pt-8 pb-2">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] dark:text-white">Contact</h1>
-          <p className="mt-2 text-[#A29487] dark:text-[#D1CDC4]">
-            Let’s discuss your lighting and interior design project.
+      {/* Hero Section */}
+      <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden px-6 py-20">
+        <Image
+          src="/hero.jpeg"
+          alt="Contact Veraluz Interiors"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
+        
+        <motion.div
+          className="max-w-3xl text-center relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-6xl">
+            Get in Touch
+          </h1>
+          <p className="text-xl text-[#D1CDC4]">
+            Let's discuss your lighting and interior design project. We're here to help bring your vision to life.
           </p>
-        </div>
+        </motion.div>
       </section>
 
+      {/* Contact Form Section */}
       <section className="flex-1 px-6 py-8">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
           <div className="rounded-xl border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-[#F5F1ED] dark:bg-[#2A2A2A] p-6">
@@ -82,7 +102,7 @@ export default function ContactPage() {
               <span>Address: 8th Floor, Building 1, No. 188 Changyi Road, Baoshan District, Shanghai, P.R. China</span>
             </p>
 
-            <p className="mt-2 text-sm text-[#4A4A4A] dark:text-[#E8E4DC]">We usually respond within 1–2 business days.</p>
+            <p className="mt-2 text-sm text-[#4A4A4A] dark:text-[#E8E4DC]">We usually respond within 1 to 2 business days.</p>
           </div>
 
           <form
@@ -128,7 +148,7 @@ export default function ContactPage() {
 
             {submitted && (
               <p className="mt-3 text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                Message sent. We’ll contact you soon.
+                Message sent. We'll contact you soon.
               </p>
             )}
             {error && <p className="mt-3 text-sm text-red-500">{error}</p>}

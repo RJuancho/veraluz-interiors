@@ -20,13 +20,14 @@ type Product = {
   specs: string;
   variants?: string[];
   tag: string;
+  imagePosition?: string;
 }
 
 type ViewMode = "grid-3" | "grid-2" | "list";
 type SortOption = "featured" | "newest" | "price-low" | "price-high" | "name";
 
 export default function Products() {
-  const { ref: catalogRef, inView: catalogInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref: catalogRef } = useInView(); // remove inView check
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("grid-3");
@@ -195,8 +196,8 @@ export default function Products() {
               <motion.div
                 ref={catalogRef}
                 className={`grid gap-6 ${gridColsClass[viewMode]}`}
-                initial={{ opacity: 0 }}
-                animate={catalogInView ? { opacity: 1 } : { opacity: 0 }}
+                initial={{ opacity: 1 }} // start visible
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
                 {sortedProducts.length > 0 ? (
@@ -214,7 +215,8 @@ export default function Products() {
                           src={product.image}
                           alt={product.name}
                           fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          style={{ objectPosition: product.imagePosition ?? "center" }}
                           sizes={viewMode === "list" ? "160px" : "(max-width: 768px) 100vw, 50vw"}
                         />
                       </div>
@@ -239,12 +241,6 @@ export default function Products() {
                           >
                             View Details
                           </Link>
-                          <button
-                            type="button"
-                            className="flex-1 px-4 py-2 rounded-lg border-2 border-[#A29487] text-[#A29487] dark:text-[#D1CDC4] font-medium hover:bg-[#A29487] hover:text-white dark:hover:bg-[#A29487] dark:hover:text-[#1A1A1A] transition text-sm"
-                          >
-                            Inquire
-                          </button>
                         </div>
                       </div>
                     </motion.div>

@@ -7,6 +7,7 @@ export type Product = {
   specs: string;
   variants?: string[];
   tag: string;
+  imagePosition?: string;
 };
 
 export const products: Product[] = [
@@ -61,7 +62,7 @@ export const products: Product[] = [
     { id: 36, name: "Spotlight — Precision 7W", category: "general", image: "/products/spotlight-3.jpeg", description: "High-CRI precision spotlight. EAGLERISE driver, BRIDGELUX chip, 3-year warranty.", specs: "Size: Φ68×62mm · Cutout: Φ55mm · Power: 7W · CRI: ≥95 · Lm/W: 100 · Lm: 700 · Beam: 15°/24°/36° · IP30", tag: "CRI ≥95 · 3yr warranty" },
     { id: 37, name: "Spotlight — Narrow 7W", category: "general", image: "/products/spotlight-4.png", description: "Narrow recessed spotlight with 5 beam angle options. EAGLERISE driver, BRIDGELUX chip.", specs: "Size: φ62×H75mm · Cutout: Ø55mm · Power: 7W · Lm/W: 90 · Beam: 8°/15°/24°/36°/60° · IP30", tag: "5 beam angles" },
     { id: 38, name: "Spotlight — Standard 15W", category: "general", image: "/products/spotlight-5.png", description: "Standard 15W recessed spotlight with 5 beam angles. EAGLERISE driver, BRIDGELUX chip.", specs: "Size: φ83×H98mm · Cutout: Ø75mm · Power: 15W · Lm/W: 90 · Beam: 8°/15°/24°/36°/60° · IP30", tag: "15W · 5 beam angles" },
-    { id: 39, name: "Downlight — Magnetic Surface", category: "general", image: "/products/downlight-4.png", description: "Surface-mount magnetic downlight with DALI dimming and 5 CCT options.", specs: "Size: φ75×90mm · Power: 10W · CCT: 2700K/3000K/4000K/5000K/6000K · CRI: RA80/90 · Beam: 12°/24°/38° · DALI/1-10V/TRIAC", tag: "DALI · 5 CCT" },
+    { id: 39, name: "Downlight — Magnetic Surface", category: "general", image: "/products/downlight-4.png", description: "Surface-mount magnetic downlight with DALI dimming and 5 CCT options.", specs: "Size: φ75×90mm · Power: 10W · CCT: 2700K/3000K/4000K/5000K/6000K · CRI: RA80/90 · Beam: 12°/24°/38° · DALI/1-10V/TRIAC", tag: "DALI · 5 CCT", imagePosition: "50% 85%", },
 ];
 
 export function getProductById(id: number) {
