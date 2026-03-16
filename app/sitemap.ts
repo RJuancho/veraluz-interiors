@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { products } from "@/lib/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://veraluzinteriors.com";
+  const baseUrl = "https://www.veraluzinteriors.com";
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

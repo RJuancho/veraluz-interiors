@@ -40,12 +40,13 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
     shortcut: "/favicon.ico",
   },
+  metadataBase: new URL("https://www.veraluzinteriors.com"),
   openGraph: {
     title: "Veraluz Interiors | Specialists in Lighting",
     description:
       "Transform your space with Veraluz Interiors. Expert lighting design, premium acoustic panels, and curated interior solutions.",
     type: "website",
-    url: "https://veraluzinteriors.com",
+    url: "https://www.veraluzinteriors.com",
     siteName: "Veraluz Interiors",
     images: [
       {

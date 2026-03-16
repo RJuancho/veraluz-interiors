@@ -306,14 +306,6 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <motion.p
-            className="mt-8 text-center text-xs sm:text-sm text-[#A29487] dark:text-[#D1CDC4]"
-            initial={{ opacity: 0 }}
-            animate={trendsInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            Hover on cards to discover implementation benefits
-          </motion.p>
         </div>
       </section>
 

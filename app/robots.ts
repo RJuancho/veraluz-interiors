@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://veraluzinteriors.com/sitemap.xml",
+    sitemap: "https://www.veraluzinteriors.com/sitemap.xml",
   };
 }
