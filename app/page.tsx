@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { MdOutlineLightbulb, MdLightbulb, MdBusiness } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -339,44 +340,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="bg-white dark:bg-[#1A1A1A] border-t border-[#D1CDC4] px-6 py-12">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-            <div>
-              <h3 className="font-semibold text-[#1A1A1A] dark:text-white mb-4">Veraluz Interiors</h3>
-              <p className="text-sm text-[#A29487] dark:text-[#D1CDC4]">Illuminating spaces with elegant design and lighting solutions</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-[#1A1A1A] dark:text-white mb-4">Services</h4>
-              <ul className="space-y-2 text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                <li><a href="#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Lighting Design</a></li>
-                <li><a href="#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Design Consulting</a></li>
-                <li><a href="#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Product Sales</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-[#1A1A1A] dark:text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                <li><a href="#portfolio" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Portfolio</a></li>
-                <li><a href="#contact" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Contact</a></li>
-                <li><Link href="/" className="hover:text-[#1A1A1A] dark:hover:text-white transition">Home</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-[#1A1A1A] dark:text-white mb-4">Connect</h4>
-              <p className="text-sm text-[#A29487] dark:text-[#D1CDC4]">
-                <a href="mailto:info@veraluzinteriors.com" className="hover:text-[#1A1A1A] dark:hover:text-white transition">
-                  info@veraluzinteriors.com
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="border-t border-[#D1CDC4] pt-8 text-center text-sm text-[#A29487] dark:text-[#D1CDC4]">
-            <p>&copy; 2026 Veraluz Interiors. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

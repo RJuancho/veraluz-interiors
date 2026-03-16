@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { FormEvent, useState } from "react";
 import { MdOutlineEmail, MdOutlinePhone, MdOutlineLocationOn } from "react-icons/md";
 import { motion } from "framer-motion";
+import Footer from "../components/Footer";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -72,7 +73,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="flex-1 px-6 py-8">
+      <section className="flex-1 px-6 py-16 sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
           <div className="rounded-xl border border-[#D1CDC4] dark:border-[#D1CDC4]/20 bg-[#F5F1ED] dark:bg-[#2A2A2A] p-6">
             <h2 className="text-xl font-semibold text-[#1A1A1A] dark:text-white">Get in touch</h2>
@@ -155,6 +156,7 @@ export default function ContactPage() {
           </form>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

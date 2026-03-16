@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import { notFound } from "next/navigation";
 import { products, getProductById } from "@/lib/products";
+import Footer from "../../components/Footer";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -39,7 +40,7 @@ export default async function ProductDetailPage({ params }: Props) {
       </section>
       
       {/* Main Content */}
-      <section className="flex-1 px-6 py-12 bg-white dark:bg-[#1A1A1A]">
+      <section className="flex-1 px-6 py-16 sm:py-24 bg-white dark:bg-[#1A1A1A]">
         <div className="mx-auto max-w-7xl">
           {/* Product Detail Grid */}
           <div className="grid gap-12 md:grid-cols-2 mb-16">
@@ -146,6 +147,8 @@ export default async function ProductDetailPage({ params }: Props) {
           )}
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

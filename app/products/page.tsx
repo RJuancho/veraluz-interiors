@@ -10,6 +10,7 @@ import { useState } from "react";
 import { BsGrid3X3Gap, BsGridFill, BsList } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { products as productData } from "@/lib/products";
+import Footer from "../components/Footer";
 
 type Product = {
   id: number;
@@ -84,7 +85,7 @@ export default function Products() {
       </section>
 
       {/* Main Content */}
-      <section className="flex-1 px-6 py-8 bg-white dark:bg-[#1A1A1A]">
+      <section className="flex-1 px-6 py-16 sm:py-24 bg-white dark:bg-[#1A1A1A]">
         <div className="mx-auto max-w-7xl">
           {/* Top Controls Bar */}
           <div className="mb-6 flex items-center justify-between border-b border-[#D1CDC4] dark:border-[#D1CDC4]/20 pb-4">
@@ -257,6 +258,7 @@ export default function Products() {
           </div>
         </div>
       </section>
+    <Footer />
     </div>
   );
 }
